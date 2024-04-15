@@ -5,10 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:LovBooks"
     Shell.FlyoutBehavior="Disabled"
-    Title="LovBooks">
+    Title="LovBooks"
+    BackgroundColor="#1C1A29">
 
+    
     <ShellContent
-        Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
