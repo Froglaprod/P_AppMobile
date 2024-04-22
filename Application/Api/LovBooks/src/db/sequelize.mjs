@@ -115,6 +115,7 @@ const importBooks = () => {
       extract_pdf: book.extract_pdf,
       summary: book.summary,
       publisher_name: book.publisher_name,
+      epub: book.epub,
     }).then((book) => console.log(book.toJSON()));
     
   });
