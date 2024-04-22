@@ -4,100 +4,94 @@
              x:Class="LovBooks.MainPage"
              BackgroundColor="#1C1A29">
 
-    <AbsoluteLayout>
-        <!-- Image Logo -->
-        <Image Source="logo.png" 
-               AbsoluteLayout.LayoutBounds="5,0,100,100" 
-               Margin="10"/>
+    <!-- Définition des colonnes de la pages -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
+        <!-- En-tête avec logo, barre de recherche et image de profil -->
+        <StackLayout Grid.Row="0" Orientation="Horizontal" Padding="10">
+            <!-- Logo -->
+            <Image Source="logo.png" WidthRequest="80" HeightRequest="100" Margin="10"/>
 
-        <!-- Organise la barre de recherche Horizontalement -->
-        <StackLayout 
-            AbsoluteLayout.LayoutBounds="122,25,160,40" 
-            Orientation="Horizontal">
-
-            <!-- Bordure barre de recherche -->
-            <Border
-                BackgroundColor="#333141"
-                StrokeThickness="0"
-                StrokeShape="RoundRectangle 11,11,11,11"
-                WidthRequest="170"
-                Padding="2,8"
-                HorizontalOptions="Center">
-
-                <!-- Barre de recherche -->
+            <!-- Barre de recherche -->
+            <Border BackgroundColor="#333141"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 11,11,11,11"
+                    WidthRequest="170"
+                    Padding="2,8"
+                    HeightRequest="40"
+                    TranslationX="10">
                 <SearchBar Placeholder="Rechercher..."
                            HorizontalOptions="FillAndExpand"/>
-
             </Border>
+
+            <!-- Image de profil -->
+            <Image Source="profil.png" WidthRequest="60" HeightRequest="100" TranslationX="50"/>
         </StackLayout>
 
-        <!-- Image Profil -->
-        <Image Source="profil.png" 
-       AbsoluteLayout.LayoutBounds="315,-5,80,100" 
-       Margin="10"/>
+        <!-- Contenu principal avec bloc de livre -->
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="10">
+                <!-- Titre Catégorie -->
+                <StackLayout Orientation="Horizontal">
+                    <Label 
+                        Text="Livres Tendances"
+                        TextColor="White"
+                        FontSize="25"
+                        FontAttributes="Bold"
+                        Margin="5,0,0,20" />
 
-
- 
-            <!-- Organisation bloc catégorie livre -->
-        <StackLayout AbsoluteLayout.LayoutBounds="0.5,100,300,0" 
-             Orientation="Vertical"
-             Padding="10">
-
-            <!-- Titre Catégorie -->
-            <Label Text="Livres Tendances"
-           TextColor="White"
-           FontSize="25"
-           FontAttributes="Bold"
-           Margin="5,0,0,12" />
-
-            <!-- Image et description -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- Livre 1 -->
-                <StackLayout Grid.Column="0" Orientation="Vertical" HorizontalOptions="Center">
-                    <Image Source="dune.png" WidthRequest="160" HeightRequest="250" />
-                    <Label Text="Dune"
-                   TextColor="White"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+                    <!-- Voir-plus -->
+                    <Label 
+                        Text="Voir-plus"
+                        TextColor="Gray"
+                        FontSize="15"
+                        TranslationY="8"
+                        TranslationX="90"/>
                 </StackLayout>
 
-                <!-- Livre 2 -->
-                <StackLayout Grid.Column="1" Orientation="Vertical" HorizontalOptions="Center">
-                    <Image Source="meg.png" WidthRequest="160" HeightRequest="250" />
-                    <Label Text="Meg"
-                   TextColor="White"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
-                    <!-- Ici vous pouvez ajouter les petites étoiles pour la note -->
-                </StackLayout>
+                <!-- Image et description -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Livre 3 -->
-                <StackLayout Grid.Column="2" Orientation="Vertical" HorizontalOptions="Center">
-                    <Image Source="crise.png" WidthRequest="160" HeightRequest="250" />
-                    <Label Text="Crise"
-                   TextColor="White"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
-                </StackLayout>
-            </Grid>
+                    <!-- Livre 1 -->
+                    <StackLayout Grid.Column="0" Orientation="Vertical" Margin="0,0,10,0">
+                        <Image Source="dune.png" WidthRequest="160" HeightRequest="250" />
+                        <Label Text="Dune 1"
+                            TextColor="White"
+                            FontSize="18"
+                            FontAttributes="Bold" 
+                            Margin="5,0,0,0"/>
+                    </StackLayout>
 
-        </StackLayout>
+                    <!-- Livre 2 -->
+                    <StackLayout Grid.Column="1" Orientation="Vertical" Margin="0,0,10,0">
+                        <Image Source="meg.png" WidthRequest="160" HeightRequest="250" />
+                        <Label Text="Meg"
+                            TextColor="White"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            Margin="5,0,0,0"/>
+                    </StackLayout>
 
-
-        <ScrollView>
+                    <!-- Livre 3 -->
+                    <StackLayout Grid.Column="2" Orientation="Vertical" Margin="0,0,10,0">
+                        <Image Source="crise.png" WidthRequest="160" HeightRequest="250" />
+                        <Label Text="Crise"
+                            TextColor="White"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            Margin="5,0,0,0"/>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
         </ScrollView>
-    </AbsoluteLayout>
-
-
-
+    </Grid>
 </ContentPage>

@@ -6,11 +6,22 @@
     xmlns:local="clr-namespace:LovBooks"
     Shell.FlyoutBehavior="Disabled"
     Title="LovBooks"
-    BackgroundColor="#1C1A29">
-
+    BackgroundColor="#1C1A29"
+    Shell.TabBarIsVisible="True">
     
-    <ShellContent
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
 
+
+    <!-- Définition de la barre d'onglets -->
+    <TabBar>
+        <ShellContent    
+        Icon="home.png"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage"
+            />
+
+    <ShellContent
+        Icon="livre.png"
+        ContentTemplate="{DataTemplate local:Livres}"
+        Route="Livres" />
+    </TabBar>
 </Shell>
