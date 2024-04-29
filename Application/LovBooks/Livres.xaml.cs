@@ -1,11 +1,21 @@
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using VersOne.Epub;
 namespace LovBooks;
 
 public partial class Livres : ContentPage
 {
-	public Livres()
+    //Permet d'utiliser les requetes http
+    HttpClient client = new();
+
+    public Livres()
 	{
-		InitializeComponent();
+		InitializeComponent();;
 	}
+
+    //Lecture epub
+    public 
 
 
 }
