@@ -1,33 +1,35 @@
-import express from 'express';
-import { Book } from '../db/sequelize.mjs';
+import express from "express";
+import { sequelize } from "../db/sequelize.mjs";
+import { DataTypes } from "sequelize";
+import { EpubModelTable } from "../model/t_epub.mjs";
 
-//Instance de express, afin de créer des routes
-const assessmentRouter = express.Router();
+const epubRouter = express.Router();
 
-//Route pour récupérer les epubs
-assessmentRouter.get('/:id/epub', (req, res) => {
-  const bookId = req.params.id;
+// Route pour obtenir les EPUB par ID
+epubRouter.get("/:id", async (req, res) => {
+  const epubId = req.params.id;
+  try {
+    const EpubModel = EpubModelTable(sequelize, DataTypes);
 
-  //Requête à la base de données pour recupérer les epubs
-  Book.findByPk(bookId)
-    .then((book) => {
-      if (!book) {
-        return res.status(404).json({ error: 'Livre non trouvé' });
-      }
-
-      //Stock le epub
-      const epubFile = book.epub;
-
-      // Message de succes
-      res.setHeader('Content-Type', 'application/epub+zip');
-      res.setHeader('Content-Disposition', `attachment; filename="${book.title}.epub"`);
-      res.send(epubFile);
-    })
-    //Message d'erreur
-    .catch((error) => {
-      console.error('Erreur lors de la récupération du fichier EPUB :', error);
-      res.status(500).json({ error: 'Erreur Interne du Serveur lors de la récupération du fichier EPUB' });
+    //Récupérer l'EPUB par ID
+    const epubEntry = await EpubModel.findOne({
+      where: {
+        id: epubId,
+      },
     });
+    //Message réponse (erreur & réussite)
+    if (epubEntry) {
+      const epubData = epubEntry.epub;
+      console.log("Données du fichier récupérées avec succès :", epubData);
+      res.status(200).json(epubData);
+    } else {
+      console.log("Aucun fichier trouvé pour l'ID spécifié :", epubId);
+      res.status(404).send("Aucun fichier trouvé pour l'ID spécifié.");
+    }
+  } catch (error) {
+    console.error("Erreur lors de la récupération des fichiers EPUB :", error);
+    res.status(500).send("Erreur lors de la récupération des fichiers EPUB.");
+  }
 });
 
-export default assessmentRouter;
+export default epubRouter;

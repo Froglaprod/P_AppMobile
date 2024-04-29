@@ -4,6 +4,7 @@ import { sequelize, initDB } from "./db/sequelize.mjs";
 import { loginRouter } from "./routes/login.mjs"; 
 import { swaggerSpec } from "./swagger.mjs";
 
+import epubRouter from "./routes/epub.mjs";
 import { booksRouter } from "./routes/bookRoutes.mjs";
 import { customersRouter,  } from "./routes/customerRoutes.mjs";
 import { categorysRouter } from "./routes/categoryRoutes.mjs";
@@ -58,6 +59,9 @@ app.use("/api/assessments", assessmentRouter);
 
 //Utilise la route pour les logins
 app.use("/api/login", loginRouter);
+
+//Utilise la route pour les epubs
+app.use("/api/epub", epubRouter);
 
 //Swagger Documentation 
 app.use(  

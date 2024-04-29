@@ -7,6 +7,7 @@ import { AuthorModelTable } from "../model/t_author.mjs";
 import { PublisherModelTable } from "../model/t_publisher.mjs";
 import { CategoryModelTable } from "../model/t_category.mjs";
 import { CommentModelTable } from "../model/t_comment.mjs";
+import { EpubModelTable } from "../model/t_epub.mjs";
 
 // Import de données
 import { books } from "./mock-book.mjs";
@@ -16,6 +17,36 @@ import { publishers } from "./mock-publisher.mjs";
 import { comments } from "./mock-comment.mjs";
 import { categorys } from "./mock-category.mjs";
 import { assessments } from "./mock-assessment.mjs";
+
+//Permet de utiliser les outils pour gérere les fichiers
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+
+//Permet d'obtenir le chemin du répertoire
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+//Répertoire fichiers epub
+const folderPath = path.join(__dirname, '../books');
+
+// Fonction pour importer les fichiers epub dans la base de données
+const importEpub = (folderPath) => {
+  // Lire les fichiers dans le dossier
+  const files = fs.readdirSync(folderPath);
+
+  // Parcourir chaque fichier
+  files.forEach(file => {
+    const filePath = path.join(folderPath, file);
+    // Lire le contenu du fichier
+    const epubData = fs.readFileSync(filePath);
+    // Insérer les données dans la base de données
+    Epub.create({ epub: epubData })
+      .then(() => console.log(`Le fichier ${file} a été importé avec succès dans la base de données.`))
+      .catch(error => console.error(`Erreur lors de l'importation du fichier ${file} :`, error));
+  });
+};
 
 // Informations pour la connexion à la db
 const sequelize = new Sequelize("db_lovbooks", "root", "root", {
@@ -33,6 +64,7 @@ const Author = AuthorModelTable(sequelize, DataTypes);
 const Publisher = PublisherModelTable(sequelize, DataTypes);
 const Category = CategoryModelTable(sequelize, DataTypes);
 const Comment = CommentModelTable(sequelize, DataTypes);
+const Epub = EpubModelTable(sequelize, DataTypes);
 
 //Liaisons entre models
 //Livres / Categories
@@ -85,6 +117,7 @@ Customer.hasMany(Book, {
 let initDB = () => {
   // Force la synchronisation (supprime toutes les données également)
   return sequelize.sync({ force: true }).then((_) => {
+    importEpub(folderPath);
     importAuthors();
     importCategory();
     importCustomers();
@@ -115,11 +148,11 @@ const importBooks = () => {
       extract_pdf: book.extract_pdf,
       summary: book.summary,
       publisher_name: book.publisher_name,
-      epub: book.epub,
     }).then((book) => console.log(book.toJSON()));
     
   });
 };
+
 
 // Import de tous les utilisateurs du "mock-customer"
 const importCustomers = () => {
