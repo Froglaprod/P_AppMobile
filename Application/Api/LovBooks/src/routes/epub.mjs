@@ -20,8 +20,14 @@ epubRouter.get("/:id", async (req, res) => {
     //Message réponse (erreur & réussite)
     if (epubEntry) {
       const epubData = epubEntry.epub;
-      console.log("Données du fichier récupérées avec succès :", epubData);
-      res.status(200).json(epubData);
+
+      //Définit la réponse en blob
+      res.set({
+        'Content-Type': 'application/epub+zip',
+        'Content-Disposition': 'attachment; filename="nom_du_fichier.epub"'
+      });
+
+      res.status(200).send(epubData);
     } else {
       console.log("Aucun fichier trouvé pour l'ID spécifié :", epubId);
       res.status(404).send("Aucun fichier trouvé pour l'ID spécifié.");

@@ -4,9 +4,14 @@
              x:Class="LovBooks.Livres"
              Title="Livres">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
+        <Entry x:Name="endpoint" WidthRequest="300"
+            Text="http://10.0.2.2:3000/api/epub/1"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Button Text="Chargez les epubs" Clicked="LoadingEpub"></Button>
+
+        <Label Text="Titre du livre:" />
+        <Label x:Name="titleLabel" />
     </VerticalStackLayout>
 </ContentPage>

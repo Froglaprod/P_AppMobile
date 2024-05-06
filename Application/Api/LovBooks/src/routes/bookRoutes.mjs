@@ -37,7 +37,7 @@ booksRouter.get("/:id", (req, res) => {
                 return res.status(404).json({ message })
             }
             const message = `Le livre don't l'id vaut ${book.id} a bien été récupéré`
-            res.json(success(message, book))
+            res.status(200).json(success(message, book))
         })
         .catch((error) => {
             const message = "Le livre n'a pas pu être récupéré. Merci de réessayer dans quelques instants."
