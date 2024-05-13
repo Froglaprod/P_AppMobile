@@ -3,15 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LovBooks.Livres"
              Title="Livres">
-    <VerticalStackLayout>
-        <Entry x:Name="endpoint" WidthRequest="300"
-            Text="http://10.0.2.2:3000/api/epub/1"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+      <StackLayout>
+        <Button Text="Charger les epubs" Clicked="LoadingEpub"/>
 
-        <Button Text="Chargez les epubs" Clicked="LoadingEpub"></Button>
+        <!-- Titre -->
+        <Label x:Name="titleLabel"
+               Text=""
+               FontSize="20"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="0,20,0,10" />
 
-        <Label Text="Titre du livre:" />
-        <Label x:Name="titleLabel" />
-    </VerticalStackLayout>
+        <!-- Image de couverture -->
+        <StackLayout x:Name="contentStackLayout"
+                     HorizontalOptions="Center"
+                     VerticalOptions="CenterAndExpand" />
+    </StackLayout>
 </ContentPage>
