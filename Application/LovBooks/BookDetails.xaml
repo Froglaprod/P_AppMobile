@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LovBooks.BookDetails"
+             Title="BookDetails">
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label x:Name="bookTitleLabel" FontSize="Large" HorizontalOptions="Center" Margin="10"/>
+            <Image x:Name="coverImage" HeightRequest="300" Aspect="AspectFit" Margin="10"/>
+            <Label Text="Description" FontSize="Medium" FontAttributes="Bold" Margin="10"/>
+            <Label x:Name="bookContentLabel" FontSize="Small" Margin="10"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
